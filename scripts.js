@@ -6,7 +6,7 @@ const rules = {
 
 const possibleChoices = Object.keys(rules);
 
-//Function to grab player's choice
+
 function getPlayerChoice() {
     let playerChoice = prompt("Chose your destiny, Rock, Paper or Scissors").toLowerCase();
 
@@ -18,45 +18,61 @@ function getPlayerChoice() {
     return playerChoice;
 }
 
-
-//Function to grab computer's choice
 function getComputerChoice() {
     let computerChoice = possibleChoices[Math.floor(possibleChoices.length * Math.random())];
     return computerChoice;
 }
 
 
-//Function that plays one round
-function gameOn() {
-    let p = getPlayerChoice();
+function gameOn(p) {
     let c = getComputerChoice()
-    console.log(p)
-    console.log(c)
     if (rules[p] === c) {
-        console.log(`Congratulations! You won because ${p} beats ${c}.`)
+        alert(`Congratulations! You won because ${p} beats ${c}.`)
         return 'pwin'
     } else if (p === c) {
-        console.log(`It's a tie, better luck next time!`)
+        alert(`It's a tie, better luck next time!`)
         return 'tie'
     } else {
-        console.log(`Computer wins because  ${c} beats ${p}, try again!`)
+        alert(`Computer wins because  ${c} beats ${p}, try again!`)
         return 'cwin'
     }
 }
 
-//Function that runs a game for 5 rounds, keeping track of the score
-function fiveGames(){
-    let pscore = 0;
-    let cscore = 0;
-    for (let i = 0; i < 5; i++) {
-        let result = gameOn();
-        if (result == 'pwin') {
-            pscore++;
-        } else if (result == 'cwin') {
-            cscore++;
-        } else {
-            continue;
-        }
-    }
-    console.log(`Oh what a game! Player: ${pscore} - Computer: ${cscore}`)
+
+const btns = document.querySelectorAll('button');
+let pscore = 0;
+let cscore = 0;
+let scorePDiv = document.querySelector('.score-p')
+let scoreCDiv = document.querySelector('.score-c')
+
+
+function clearScores() {
+    pscore = 0
+    cscore = 0
+    scoreCDiv.textContent = `${cscore}`
+    scorePDiv.textContent = `${pscore}`
 }
+
+btns.forEach(function (btn) {
+    btn.addEventListener('click', () => {
+        let p = btn.id;
+        let gameResult = gameOn(p)
+        if (gameResult == 'pwin') {
+            pscore++;
+        } else if (gameResult == 'cwin') {
+            cscore++;
+        }
+        console.log(pscore, cscore)
+        scoreCDiv.textContent = `${cscore}`
+        scorePDiv.textContent = `${pscore}`
+
+        if (pscore == 5) {
+            alert(`Player reached 5 points, congratulations you won! \nThe final score was \nPlayer: ${pscore}\nComputer: ${cscore}`)
+            clearScores()
+        } else if (cscore == 5) {
+            alert(`Computer reached 5 points, congratulations you won! \nThe final score was \nPlayer: ${pscore}\nComputer: ${cscore}`)
+            clearScores()
+        }
+    })
+})
+

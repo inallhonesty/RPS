@@ -1,0 +1,53 @@
+button {
+    border: 0;
+    background-color: white;
+}
+
+.game-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    text-align: center;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    border: 2px pink;
+    border-style: dotted;
+    margin-top: 5%;
+    margin-bottom: 10%;
+
+}
+
+
+.score-board {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 30px;
+}
+
+.score-p,
+.score-c {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10%;
+
+}
+.game-board {
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
